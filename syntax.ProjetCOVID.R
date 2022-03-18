@@ -2,7 +2,7 @@
 
 #1. Importer les données ####
 library(readxl)
-df <- read_excel("df.pinel.xlsx")
+df <- read_excel("Data.frames/df.pinel.xlsx")
 View(df)
 
 #2. Structure des données #### 
@@ -234,7 +234,7 @@ df %>%
 
 #1. Importer les données ####
 library(readxl)
-dfu <- read_excel("df.unite.xlsx")
+dfu <- read_excel("Data.frames/df.unite.xlsx")
 View(dfu) # OK
 
 #2. Créer une variable « Période COVID » ####
