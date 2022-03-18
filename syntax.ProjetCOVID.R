@@ -21,7 +21,6 @@ class(df$datedeb) # Date
 class(df$datefin) # Date
 
 ##2.3. Variable « période COVID » ####
-
 df$cov <- ifelse(df$datefin > as.Date("2020-03-13"),1,0) 
 df$cov <- factor(df$cov, levels = c(0,1),labels = c("Pré-COVID","Post-COVID"))
 library(sjmisc)
