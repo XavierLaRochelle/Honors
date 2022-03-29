@@ -2,7 +2,7 @@
 
 #1. Importer les données ####
 library(readxl)
-df <- read_excel("Data.frames/df.pinel.xlsx")
+df <- read_excel("df.pinel.xlsx")
 View(df)
 
 #2. Structure des données #### 
