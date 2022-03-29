@@ -98,9 +98,9 @@ df %>%
   theme_classic()
 
 ##3.3. Transferts ####
-frq(df,trans)    
+frq(df,trans1,trans2)    
 # Le nombre moyens de transferts est une meilleur mesure du nombre de transferts.
-df$mtrans <- df$trans/df$dureeper
+df$mtrans <- df$trans1/df$dureeper
 df %>%
   ggplot(aes(datefin,mtrans)) +
   coord_cartesian(ylim = c(0,max(df$mtrans) + max(df$mtrans)/4)) +
