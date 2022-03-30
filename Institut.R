@@ -98,7 +98,9 @@ df %>%
   theme_classic()
 
 ##3.3. Transferts ####
-frq(df,trans1,trans2)    
+frq(df,trans1,trans2) 
+df %>%
+  
 # Le nombre moyens de transferts est une meilleur mesure du nombre de transferts.
 df$mtrans <- df$trans1/df$dureeper
 df %>%

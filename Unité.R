@@ -2,14 +2,18 @@
 
 #1. Importer les données ####
 library(readxl)
-dfu <- read_excel("Data.frames/df.unite.xlsx")
+dfu <- read_excel("df.unite.xlsx")
 View(dfu) # OK
 
-#2. Créer une variable « Période COVID » ####
+#2. Structure des données ####
 library(dplyr)
 library(labelled)
+library(sjmisc)
 
-# Convertir les dates d'un format excel au format R
+##2.1. Période financière (index) ####
+frq(dfu,per)      # OK
+
+##2.2. Dates de débuts et de fin des périodes financières ####
 class(dfu$datedeb) # "POSIXct" "POSIXt"
 class(dfu$datefin) # "POSIXct" "POSIXt"
 dfu$datedeb <- as.Date(dfu$datedeb, "%Y-%M-%D")
@@ -17,7 +21,7 @@ dfu$datefin <- as.Date(dfu$datefin, "%Y-%M-%D")
 class(dfu$datedeb) # Date
 class(dfu$datefin) # Date
 
-# Créer la variable dichotomique
+##2.3. Variable « période COVID » ####
 dfu$cov <- ifelse(dfu$datefin > as.Date("2020-03-13"),1,0) 
 dfu$cov <- factor(dfu$cov, levels = c(0,1),labels = c("Pré-COVID","Post-COVID"))
 frq(dfu,cov) # OK
@@ -25,6 +29,29 @@ frq(dfu,cov) # OK
 # Vérification
 dfu %>%
   select(per,datefin,cov) %>%
+  View() # OK
+
+##2.4. Durée de la période financière ####
+library(ggplot2)
+frq(df,dureeper) # OK
+df %>%
+  ggplot(aes(datefin,dureeper)) +
+  coord_cartesian(ylim = c(0,max(df$dureeper))) +
+  geom_vline(aes(xintercept = as.Date("2020-03-13")),linetype = 2) + 
+  geom_point() + 
+  theme_classic()
+# Toutes les periodes n'ont pas la même durée. 
+# Pour les 6 périodes indexées 12 et 13, la durée diffère de 28 jours. 
+
+##2.5. Lits dressés ####
+frq(df,litsdres) # OK
+df %>%
+  ggplot(aes(datefin,litsdres)) +
+  geom_vline(aes(xintercept = as.Date("2020-03-13")),linetype = 2) + 
+  geom_point() + 
+  theme_classic()
+# Le nombre total de lits dressé passe de 267 à 268 
+# entre l'année financière 2019-2020 et l'année financière 2020-2021.efin,cov) %>%
   View() # OK
 
 #3. Vérification des données ####
